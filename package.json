@@ -1,12 +1,12 @@
 {
-  "name": "cruise-ships",
+  "name": "ship-activity",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "description": "test for the cruise-ships activity",
+  "main": "ship.js",
   "scripts": {
     "test": "jest"
   },
-  "author": "",
+  "author": "Rui",
   "license": "ISC",
   "devDependencies": {
     "jest": "^24.9.0"
