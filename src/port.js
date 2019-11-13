@@ -15,6 +15,3 @@ class Port {
 }
 
 module.exports = Port;
-
-//When ship docks, addShip needs to run.
-//When ship sets sail, removeShip needs to run.

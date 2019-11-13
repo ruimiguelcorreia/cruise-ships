@@ -19,7 +19,7 @@ describe("Port", () => {
   });
 
   test("it adds the ship to the port", () => {
-    const ship = {};
+    const ship = jest.fn();
 
     liverpool.addShip(ship);
 
@@ -27,20 +27,19 @@ describe("Port", () => {
   });
 
   test("it removes the ship from the port", () => {
-    const ship1 = { name: "ship1" };
-    const ship2 = { name: "ship2" };
-    const ship3 = { name: "ship3" };
+    const ship1 = jest.fn();
+    const ship2 = jest.fn();
+    const ship3 = jest.fn();
 
     liverpool.addShip(ship1);
     liverpool.addShip(ship2);
     liverpool.addShip(ship3);
     liverpool.removeShip(ship2);
 
-    expect(liverpool.ships).toEqual([{ name: "ship1" }, { name: "ship3" }]);
+    expect(liverpool.ships).toEqual([ship1, ship3]);
   });
 
   test("Ship > gets added to port on instantiation", () => {
-    const port = new Port("Liverpool");
     const itinerary = new Itinerary([port]);
     const ship = new Ship(itinerary);
 

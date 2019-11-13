@@ -3,15 +3,12 @@ const Port = require("../src/port");
 const Itinerary = require("../src/itinerary");
 
 describe("Ship", () => {
-  let port, itinerary, birmingham, porto, ship, bigItinerary, bigShip;
+  let itinerary, birmingham, porto, ship;
   beforeEach(() => {
-    port = new Port("Liverpool");
-    itinerary = new Itinerary([port]);
     birmingham = new Port("Birmingham");
     porto = new Port("Porto");
+    itinerary = new Itinerary([birmingham, porto]);
     ship = new Ship(itinerary);
-    bigItinerary = new Itinerary([birmingham, porto]);
-    bigShip = new Ship(bigItinerary);
   });
 
   test("creates a new object", () => {
@@ -19,29 +16,29 @@ describe("Ship", () => {
   });
 
   test("it idenfities a starting port", () => {
-    expect(ship.currentPort).toBe(port);
+    expect(ship.currentPort).toBe(birmingham);
   });
 
   test("it can set sail", () => {
-    bigShip.setSail();
+    ship.setSail();
 
-    expect(bigShip.currentPort).toBeFalsy();
-    expect(bigShip.previousPort).toBe(birmingham);
-    expect(birmingham.ships).not.toContain(bigShip);
+    expect(ship.currentPort).toBeFalsy();
+    expect(ship.previousPort).toBe(birmingham);
+    expect(birmingham.ships).not.toContain(ship);
   });
 
   test("it can dock at a different port", () => {
-    bigShip.setSail();
-    bigShip.dock();
+    ship.setSail();
+    ship.dock();
 
-    expect(bigShip.currentPort).toBe(porto);
-    expect(porto.ships).toContain(bigShip);
+    expect(ship.currentPort).toBe(porto);
+    expect(porto.ships).toContain(ship);
   });
 
   test("it can not go further than the itinerary", () => {
-    bigShip.setSail();
-    bigShip.dock();
+    ship.setSail();
+    ship.dock();
 
-    expect(() => bigShip.setSail()).toThrowError("End of itinerary reached.");
+    expect(() => ship.setSail()).toThrowError("End of itinerary reached.");
   });
 });

@@ -2,12 +2,11 @@ const Itinerary = require("../src/itinerary");
 const Port = require("../src/port");
 
 describe("Itinerary", () => {
-  let itinerary, bigItinerary, rome, barcelona;
+  let itinerary, rome, barcelona;
   beforeEach(() => {
-    itinerary = new Itinerary();
-    bigItinerary = new Itinerary([rome, barcelona]);
-    rome = new Port("Rome");
-    barcelona = new Port("Barcelona");
+    rome = jest.fn();
+    barcelona = jest.fn();
+    itinerary = new Itinerary([rome, barcelona]);
   });
 
   test("it can be instantiated", () => {
@@ -15,6 +14,6 @@ describe("Itinerary", () => {
   });
 
   test("it has a ports property", () => {
-    expect(bigItinerary.port).toEqual([rome, barcelona]);
+    expect(itinerary.port).toEqual([rome, barcelona]);
   });
 });
